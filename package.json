@@ -1,0 +1,16 @@
+{
+  "name": "com.xorboo.urutils",
+  "version": "0.1.1",
+  "displayName": "UrUtils",
+  "description": "Ururu Utils - random tools and scripts",
+  "unity": "2019.1",
+  "author": {
+    "name": "Kirill Korepanov",
+    "email": "xorboo@gmail.com",
+    "url": "https://xorb.ooo"
+  },
+  "dependencies": {
+    "com.unity.addressables": "1.16.19",
+    "com.unity.textmeshpro": "3.0.6"
+  }
+}
