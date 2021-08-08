@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace UrUtils.Misc
 {
@@ -10,7 +12,7 @@ namespace UrUtils.Misc
     /// As a note, this is made as MonoBehaviour because we need Coroutines.
     /// </summary>
     [DefaultExecutionOrder(-10000)]
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class OdinSingleton<T> : SerializedMonoBehaviour where T : SerializedMonoBehaviour
     {
         static readonly object Lock = new object();
         static bool ApplicationIsQuitting = false;
@@ -150,3 +152,4 @@ namespace UrUtils.Misc
         }
     }
 }
+#endif

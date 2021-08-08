@@ -1,10 +1,15 @@
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
+
 using UnityEngine;
 
 namespace UrUtils.Extensions.ValueReference
 {
+#if ODIN_INSPECTOR
     [InlineProperty]
     [LabelWidth(80)]
+    #endif
     public abstract class ValueReference<TValue, TAsset> where TAsset : ValueAsset<TValue>
     {
         #region Value Selection
@@ -76,8 +81,9 @@ namespace UrUtils.Extensions.ValueReference
 
         #region Editor Helpers
 
-#if ODIN_INSPECTOR
         bool UseValue => Type == UseType.V;
+
+#if ODIN_INSPECTOR
         bool UseReference => !UseValue;
 
         bool ShowEditButton => ReferenceData != null && UseReference;
