@@ -105,14 +105,6 @@ $RECYCLE.BIN/
 
 
 # --------------------------------------------------------------------------- #
-#                                   Custom                                    #
-# --------------------------------------------------------------------------- #
-# Exceptions, we might need dll's for imported libraries
-!*.dll
-!*.obj
-
-
-# --------------------------------------------------------------------------- #
 #                             Rider (JetBrains)                               #
 #                                                                             #
 # https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore  #
@@ -172,3 +164,14 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+
+# --------------------------------------------------------------------------- #
+#                                   Custom                                    #
+# --------------------------------------------------------------------------- #
+# Exceptions, we might need dll's for imported libraries
+!*.dll
+!*.obj
+
+# Don't commit Odin plugin into publicly-available repository :)
+/Assets/Plugins/Sirenix/
