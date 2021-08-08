@@ -174,4 +174,4 @@ fabric.properties
 !*.obj
 
 # Don't commit Odin plugin into publicly-available repository :)
-/Assets/Plugins/Sirenix/
+/Assets/Plugins/Sirenix**
