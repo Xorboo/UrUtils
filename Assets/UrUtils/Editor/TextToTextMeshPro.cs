@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UrUtils
 {
-    public class TextToTextMeshPro : UnityEditor.Editor
+    public static class TextToTextMeshPro
     {
         class TextMeshProSettings
         {
@@ -25,7 +25,7 @@ namespace UrUtils
             public bool RayCastTarget;
         }
 
-        [MenuItem("Tools/Text To TextMeshPro", false, 4000)]
+        [MenuItem(UrConstants.MenuRoot + "TMPro Convert/Text To TextMeshPro", false, 4000)]
         static void ConvertToTextMeshPro()
         {
             if (TMP_Settings.defaultFontAsset == null)
@@ -40,7 +40,7 @@ namespace UrUtils
             }
         }
 
-        [MenuItem("Tools/Text To TextMeshPro (Recursive)", false, 4000)]
+        [MenuItem(UrConstants.MenuRoot + "TMPro Convert/Text To TextMeshPro (Recursive)", false, 4000)]
         static void ConvertToTextMeshProRecursive()
         {
             if (TMP_Settings.defaultFontAsset == null)
