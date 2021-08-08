@@ -1,26 +1,26 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UrUtils.Extensions.SerializedVariable;
+using UnityEngine.Serialization;
 
-namespace UrUtils.Extensions
+namespace UrUtils.Extensions.SerializedVariable
 {
     [Serializable]
     public class BaseHolder<TBase, TReference> where TReference: BaseVariable<TBase>
     {
-        [SerializeField] bool _useConstant = false;
-        [SerializeField] TBase _constant = default;
-        [SerializeField] TReference _variable = default;
+        [SerializeField] bool UseConstant = false;
+        [SerializeField] TBase Constant = default;
+        [SerializeField] TReference Variable = default;
 
         public BaseHolder() { }
 
         public BaseHolder(TBase value)
         {
-            _useConstant = true;
-            _constant = value;
+            UseConstant = true;
+            Constant = value;
         }
 
-        public TBase Value => _useConstant ? _constant : _variable.Value;
+        public TBase Value => UseConstant ? Constant : Variable.Value;
 
         public static implicit operator TBase(BaseHolder<TBase, TReference> reference)
         {

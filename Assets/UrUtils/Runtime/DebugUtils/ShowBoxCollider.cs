@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UrUtils.DebugUtils
 {
@@ -6,12 +7,12 @@ namespace UrUtils.DebugUtils
     public class ShowBoxCollider : MonoBehaviour
     {
 #if UNITY_EDITOR
-        [SerializeField] private bool _alwaysDraw = true;
-        [SerializeField] private Color _color = new Color(0f, 1f, 0f, 0.3f);
+        [SerializeField] bool AlwaysDraw = true;
+        [SerializeField] Color Color = new Color(0f, 1f, 0f, 0.3f);
 
         void OnDrawGizmos()
         {
-            if (_alwaysDraw)
+            if (AlwaysDraw)
             {
                 DrawCollider();
             }
@@ -19,7 +20,7 @@ namespace UrUtils.DebugUtils
 
         void OnDrawGizmosSelected()
         {
-            if (!_alwaysDraw)
+            if (!AlwaysDraw)
             {
                 DrawCollider();
             }
@@ -29,7 +30,7 @@ namespace UrUtils.DebugUtils
         {
             var t = transform;
             Gizmos.matrix = Matrix4x4.TRS(t.position, t.rotation, t.lossyScale);
-            Gizmos.color = _color;
+            Gizmos.color = Color;
 
             var boxCollider = GetComponent<BoxCollider>();
             Gizmos.DrawCube(

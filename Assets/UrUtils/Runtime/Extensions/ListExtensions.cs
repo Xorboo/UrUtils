@@ -25,9 +25,7 @@ namespace UrUtils.Extensions
             {
                 n--;
                 int k = Rand.Range(0, n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                (list[k], list[n]) = (list[n], list[k]);
             }
         }
 

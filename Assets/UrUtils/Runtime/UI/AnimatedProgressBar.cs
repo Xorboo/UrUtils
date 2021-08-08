@@ -17,13 +17,13 @@ namespace UrUtils.UI
                 }
             }
         }
-        [SerializeField, Range(0, 1)] private float _value = 0f;
+        [SerializeField, Range(0, 1)] float _value = 0f;
 
-        [SerializeField] private Image _slider = null;
-        [SerializeField] private float _smoothness = 1f;
-        [SerializeField] private bool _instantDecrease = true;
+        [SerializeField] Image _slider = null;
+        [SerializeField] float _smoothness = 1f;
+        [SerializeField] bool _instantDecrease = true;
 
-        private void Update()
+        void Update()
         {
             if (_slider != null)
             {
@@ -36,7 +36,7 @@ namespace UrUtils.UI
             }
         }
 
-        private void OnValidate()
+        void OnValidate()
         {
             if (_slider != null)
             {
@@ -44,7 +44,7 @@ namespace UrUtils.UI
             }
         }
 
-        private void SetFill(float value)
+        void SetFill(float value)
         {
             _slider.fillAmount = value;
         }

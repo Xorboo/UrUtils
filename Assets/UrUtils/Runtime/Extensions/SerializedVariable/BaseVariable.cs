@@ -4,8 +4,8 @@ namespace UrUtils.Extensions.SerializedVariable
 {
     public class BaseVariable<T> : ScriptableObject
     {
-        public T Value => _value;
+        public T Value => StoredValue;
 
-        [SerializeField] private T _value = default;
+        [SerializeField] T StoredValue = default;
     }
 }

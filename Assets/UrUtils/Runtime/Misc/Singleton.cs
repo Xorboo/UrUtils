@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UrUtils.Misc
 {
@@ -13,8 +12,8 @@ namespace UrUtils.Misc
     [DefaultExecutionOrder(-10000)]
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static readonly object _lock = new object();
-        private static bool _applicationIsQuitting = false;
+        static readonly object Lock = new object();
+        static bool ApplicationIsQuitting = false;
 
         /// <summary>
         /// Whether Singleton should call [DontDestroyOnLoad] or not
@@ -26,7 +25,7 @@ namespace UrUtils.Misc
         {
             get
             {
-                if (_applicationIsQuitting && Application.isPlaying)
+                if (ApplicationIsQuitting && Application.isPlaying)
                 {
                     Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
                                      "' already destroyed on application quit." +
@@ -34,28 +33,28 @@ namespace UrUtils.Misc
                     return null;
                 }
 
-                lock (_lock)
+                lock (Lock)
                 {
-                    if (_instance == null)
+                    if (InstanceRef == null)
                     {
                         CreateInstance();
                     }
 
-                    return _instance;
+                    return InstanceRef;
                 }
             }
         }
 
-        private static T _instance;
+        static T InstanceRef;
 
         public bool IsOriginal => Instance == GetComponent<T>();
 
         /// True if instance already exists
         public static bool Exists(bool tryFinding = false)
         {
-            if (_instance != null)
+            if (InstanceRef != null)
             {
-                return !_applicationIsQuitting;
+                return !ApplicationIsQuitting;
             }
 
             if (tryFinding)
@@ -63,31 +62,31 @@ namespace UrUtils.Misc
                 CreateInstance(false);
             }
 
-            return _instance != null;
+            return InstanceRef != null;
         }
 
         public static T CreateInstance(bool canCreateObject = true)
         {
-            if (_instance == null)
+            if (InstanceRef == null)
             {
                 var instances = FindObjectsOfType<T>();
 
                 if (instances.Length > 1)
                 {
                     Debug.LogError($"[Singleton] Something went wrong  - there should never be more than 1 singleton (have {instances.Length})! Reopening the scene might fix it.");
-                    return _instance;
+                    return InstanceRef;
                 }
 
                 if (instances.Length > 0)
                 {
-                    _instance = instances[0];
+                    InstanceRef = instances[0];
                 }
                 else
                 {
                     if (canCreateObject)
                     {
                         var singletonObject = new GameObject();
-                        _instance = singletonObject.AddComponent<T>();
+                        InstanceRef = singletonObject.AddComponent<T>();
 
                         Debug.Log($"[Singleton] An instance of '{typeof(T)}' is needed in the scene, so '{singletonObject}' was created");
                     }
@@ -99,14 +98,14 @@ namespace UrUtils.Misc
 
             }
 
-            return _instance;
+            return InstanceRef;
         }
 
         protected virtual void Awake()
         {
-            if (_instance == null)
+            if (InstanceRef == null)
             {
-                _instance = GetComponent<T>();
+                InstanceRef = GetComponent<T>();
                 gameObject.name = $"[Singleton] {typeof(T)}";
                 if (transform.parent)
                 {
@@ -121,7 +120,7 @@ namespace UrUtils.Misc
             }
             else
             {
-                if (_instance != GetComponent<T>())
+                if (InstanceRef != GetComponent<T>())
                 {
                     Debug.Log($"Singleton '{typeof(T)}' awakes, but instance is already not null - destroying this copy");
                     DestroyImmediate(this);
@@ -131,7 +130,7 @@ namespace UrUtils.Misc
 
         protected void OnApplicationQuit()
         {
-            _applicationIsQuitting = true;
+            ApplicationIsQuitting = true;
         }
 
         /// <summary>
@@ -144,9 +143,9 @@ namespace UrUtils.Misc
         /// </summary>
         protected virtual void OnDestroy()
         {
-            if (GetComponent<T>() == _instance)
+            if (GetComponent<T>() == InstanceRef)
             {
-                _instance = null;
+                InstanceRef = null;
             }
         }
     }

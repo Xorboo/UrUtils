@@ -1,7 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UrUtils.Extensions.SerializedVariable;
 
-namespace UrUtils.Extensions.SerializedVariable.Editor
+namespace UrUtils.SerializedVariable
 {
     [CustomPropertyDrawer(typeof(StringHolder))]
     public class StringHolderDrawer : ReferenceDrawer { }
@@ -20,20 +21,17 @@ namespace UrUtils.Extensions.SerializedVariable.Editor
         /// <summary>
         /// Options to display in the popup to select constant or variable.
         /// </summary>
-        private readonly string[] _popupOptions = {"Use Constant", "Use Variable"};
+        readonly string[] PopupOptions = {"Use Constant", "Use Variable"};
 
         /// <summary> Cached style to use to draw the popup button. </summary>
-        private GUIStyle _popupStyle;
+        GUIStyle PopupStyle;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (_popupStyle == null)
+            PopupStyle ??= new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
             {
-                _popupStyle = new GUIStyle(GUI.skin.GetStyle("PaneOptions"))
-                {
-                    imagePosition = ImagePosition.ImageOnly
-                };
-            }
+                imagePosition = ImagePosition.ImageOnly
+            };
 
             label = EditorGUI.BeginProperty(position, label, property);
             position = EditorGUI.PrefixLabel(position, label);
@@ -47,15 +45,15 @@ namespace UrUtils.Extensions.SerializedVariable.Editor
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
-            buttonRect.yMin += _popupStyle.margin.top;
-            buttonRect.width = _popupStyle.fixedWidth + _popupStyle.margin.right;
+            buttonRect.yMin += PopupStyle.margin.top;
+            buttonRect.width = PopupStyle.fixedWidth + PopupStyle.margin.right;
             position.xMin = buttonRect.xMax;
 
             // Store old indent level and set it to 0, the PrefixLabel takes care of it
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            int result = EditorGUI.Popup(buttonRect, useConstant.boolValue ? 0 : 1, _popupOptions, _popupStyle);
+            int result = EditorGUI.Popup(buttonRect, useConstant.boolValue ? 0 : 1, PopupOptions, PopupStyle);
 
             useConstant.boolValue = result == 0;
 

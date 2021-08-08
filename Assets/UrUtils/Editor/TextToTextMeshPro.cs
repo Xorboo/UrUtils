@@ -3,11 +3,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UrUtils.Editor
+namespace UrUtils
 {
     public class TextToTextMeshPro : UnityEditor.Editor
     {
-        private class TextMeshProSettings
+        class TextMeshProSettings
         {
             public bool Enabled;
             public FontStyles FontStyle;
@@ -26,7 +26,7 @@ namespace UrUtils.Editor
         }
 
         [MenuItem("Tools/Text To TextMeshPro", false, 4000)]
-        private static void ConvertToTextMeshPro()
+        static void ConvertToTextMeshPro()
         {
             if (TMP_Settings.defaultFontAsset == null)
             {
@@ -41,7 +41,7 @@ namespace UrUtils.Editor
         }
 
         [MenuItem("Tools/Text To TextMeshPro (Recursive)", false, 4000)]
-        private static void ConvertToTextMeshProRecursive()
+        static void ConvertToTextMeshProRecursive()
         {
             if (TMP_Settings.defaultFontAsset == null)
             {
@@ -55,7 +55,7 @@ namespace UrUtils.Editor
             }
         }
 
-        private static void ConvertTextToTextMeshProRecursive(GameObject target)
+        static void ConvertTextToTextMeshProRecursive(GameObject target)
         {
             if (target.GetComponent<Text>() != null)
             {
@@ -75,7 +75,7 @@ namespace UrUtils.Editor
             }
         }
 
-        private static void ConvertTextToTextMeshPro(GameObject target)
+        static void ConvertTextToTextMeshPro(GameObject target)
         {
             TextMeshProSettings settings = GetTextMeshProSettings(target);
             if (settings == null)
@@ -113,7 +113,7 @@ namespace UrUtils.Editor
             EditorUtility.SetDirty(target);
         }
 
-        private static TextMeshProSettings GetTextMeshProSettings(GameObject gameObject)
+        static TextMeshProSettings GetTextMeshProSettings(GameObject gameObject)
         {
             Text uiText = gameObject.GetComponent<Text>();
             if (uiText == null)
@@ -141,17 +141,17 @@ namespace UrUtils.Editor
             };
         }
 
-        private static bool HorizontalWrapModeToBool(HorizontalWrapMode overflow)
+        static bool HorizontalWrapModeToBool(HorizontalWrapMode overflow)
         {
             return overflow == HorizontalWrapMode.Wrap;
         }
 
-        private static TextOverflowModes VerticalWrapModeToTextOverflowModes(VerticalWrapMode verticalOverflow)
+        static TextOverflowModes VerticalWrapModeToTextOverflowModes(VerticalWrapMode verticalOverflow)
         {
             return verticalOverflow == VerticalWrapMode.Truncate ? TextOverflowModes.Truncate : TextOverflowModes.Overflow;
         }
 
-        private static FontStyles FontStyleToFontStyles(FontStyle fontStyle)
+        static FontStyles FontStyleToFontStyles(FontStyle fontStyle)
         {
             switch (fontStyle)
             {
@@ -173,7 +173,7 @@ namespace UrUtils.Editor
             }
         }
 
-        private static TextAlignmentOptions TextAnchorToTextAlignmentOptions(TextAnchor textAnchor)
+        static TextAlignmentOptions TextAnchorToTextAlignmentOptions(TextAnchor textAnchor)
         {
             switch (textAnchor)
             {

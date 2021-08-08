@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace UrUtils.Editor
+namespace UrUtils
 {
     [InitializeOnLoad]
     public static class EditorCoroutineRunner
     {
-        private static readonly List<IEnumerator> _runningCoroutines = new List<IEnumerator>();
+        static readonly List<IEnumerator> RunningCoroutines = new List<IEnumerator>();
 
         static EditorCoroutineRunner()
         {
@@ -16,18 +16,18 @@ namespace UrUtils.Editor
 
         public static IEnumerator Start(IEnumerator newCoroutine)
         {
-            _runningCoroutines.Add(newCoroutine);
+            RunningCoroutines.Add(newCoroutine);
             return newCoroutine;
         }
 
-        private static void ExecuteCoroutine()
+        static void ExecuteCoroutine()
         {
-            for (int i = _runningCoroutines.Count - 1; i >= 0; i--)
+            for (int i = RunningCoroutines.Count - 1; i >= 0; i--)
             {
-                bool finish = !_runningCoroutines[i].MoveNext();
+                bool finish = !RunningCoroutines[i].MoveNext();
                 if (finish)
                 {
-                    _runningCoroutines.RemoveAt(i);
+                    RunningCoroutines.RemoveAt(i);
                 }
             }
         }
