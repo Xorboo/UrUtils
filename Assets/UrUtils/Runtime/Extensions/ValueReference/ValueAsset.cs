@@ -10,10 +10,8 @@ namespace UrUtils.Extensions.ValueReference
         T StoredValue = default;
     }
 
-#if UNITY_EDITOR
     public static class ValueAssetConstants
     {
         public const string MenuItemRoot = "Value Asset/";
     }
-#endif
 }
