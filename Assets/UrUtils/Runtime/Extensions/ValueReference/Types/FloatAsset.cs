@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UrUtils.Extensions.ValueReference.Types
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = ValueAssetConstants.MenuItemRoot + "Float")]
     public class FloatAsset : ValueAsset<float> { }
 
     [Serializable]

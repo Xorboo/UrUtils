@@ -6,6 +6,14 @@ namespace UrUtils.Extensions.ValueReference
     {
         public T Value => StoredValue;
 
-        [SerializeField] T StoredValue = default;
+        [SerializeField]
+        T StoredValue = default;
     }
+
+#if UNITY_EDITOR
+    public static class ValueAssetConstants
+    {
+        public const string MenuItemRoot = "Value Asset/";
+    }
+#endif
 }

@@ -9,15 +9,15 @@ namespace UrUtils.Extensions.ValueReference
 #if ODIN_INSPECTOR
     [InlineProperty]
     [LabelWidth(80)]
-    #endif
+#endif
     public abstract class ValueReference<TValue, TAsset> where TAsset : ValueAsset<TValue>
     {
         #region Value Selection
 
         protected enum UseType
         {
-                V, // Use Value
-                R  // Use Reference
+            V, // Use Value
+            R // Use Reference
         };
 
 #if ODIN_INSPECTOR
@@ -79,6 +79,7 @@ namespace UrUtils.Extensions.ValueReference
 
         #endregion
 
+
         #region Editor Helpers
 
         bool UseValue => Type == UseType.V;
@@ -95,6 +96,46 @@ namespace UrUtils.Extensions.ValueReference
             EditableReferenceData = ReferenceData;
         }
 #endif
+
+        #endregion
+
+
+        #region Comparison Overrides
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ValueReference<TValue, TAsset> other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Value.Equals(other.Value);
+        }
+
+        public static bool operator ==(ValueReference<TValue, TAsset> obj1, ValueReference<TValue, TAsset> obj2)
+        {
+            if (ReferenceEquals(obj1, obj2))
+                return true;
+
+            if (ReferenceEquals(obj1, null))
+                return false;
+
+            if (ReferenceEquals(obj2, null))
+                return false;
+
+            return obj1.Equals(obj2);
+        }
+
+        public static bool operator !=(ValueReference<TValue, TAsset> obj1, ValueReference<TValue, TAsset> obj2)
+        {
+            return !(obj1 == obj2);
+        }
 
         #endregion
     }

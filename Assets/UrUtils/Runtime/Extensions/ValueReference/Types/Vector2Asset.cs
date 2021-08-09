@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UrUtils.Extensions.ValueReference.Types
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = ValueAssetConstants.MenuItemRoot + "Vector2")]
     public class Vector2Asset : ValueAsset<Vector2> { }
 
     [Serializable]

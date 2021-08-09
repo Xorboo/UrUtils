@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UrUtils.Extensions.ValueReference.Types
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = ValueAssetConstants.MenuItemRoot + "Color")]
     public class ColorAsset : ValueAsset<Color> { }
 
     [Serializable]
