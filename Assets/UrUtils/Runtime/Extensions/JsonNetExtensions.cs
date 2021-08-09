@@ -7,7 +7,7 @@ namespace UrUtils.Extensions
 {
     public static class JsonNetExtensions
     {
-        public static T GetValue<T>(this JToken token, T defaultValue = default, bool logException = true, string errorPrefix = "")
+        public static T ToObjectSafe<T>(this JToken token, T defaultValue = default, bool logException = true, string errorPrefix = "")
         {
             try
             {
@@ -17,7 +17,7 @@ namespace UrUtils.Extensions
             catch (Exception e)
             {
                 if (logException)
-                    Debug.LogError($"{errorPrefix}. Can't convert token to '{typeof(T).FullName}', returning default value [{defaultValue}]. Exception:\n{e}");
+                    Debug.LogError($"{errorPrefix}Can't convert token to '{typeof(T).FullName}', returning default value [{defaultValue}]. Exception:\n{e}");
                 return defaultValue;
             }
         }
