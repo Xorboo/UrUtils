@@ -11,7 +11,7 @@ namespace UrUtils.Extensions
         {
             try
             {
-                var value = token.Value<T>();
+                var value = token.ToObject<T>();
                 return value;
             }
             catch (Exception e)
