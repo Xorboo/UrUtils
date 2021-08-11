@@ -10,6 +10,8 @@ namespace UrUtils.Animation
     {
 #if ODIN_INSPECTOR
         [BoxGroup("Animation")]
+#else
+        [Header("Animation")]
 #endif
         [SerializeField]
         [Tooltip("Value curve during a single loop")]

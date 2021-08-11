@@ -87,6 +87,14 @@ namespace UrUtils.Misc
                 {
                     if (canCreateObject)
                     {
+#if UNITY_EDITOR
+                        if (!Application.isPlaying)
+                        {
+                            Debug.LogWarning($"Not creating a singleton '{typeof(T)}' outside of play session!");
+                            return null;
+                        }
+#endif
+
                         var singletonObject = new GameObject();
                         InstanceRef = singletonObject.AddComponent<T>();
 
