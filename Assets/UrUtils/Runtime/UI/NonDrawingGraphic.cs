@@ -5,10 +5,12 @@
 using Sirenix.OdinInspector.Editor;
 #endif
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UrUtils.UI
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public class NonDrawingGraphic : Graphic
     {
         public override void SetMaterialDirty() { }
