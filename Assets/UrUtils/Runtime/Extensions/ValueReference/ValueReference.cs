@@ -77,6 +77,11 @@ namespace UrUtils.Extensions.ValueReference
             return valueReference.Value;
         }
 
+        public override string ToString()
+        {
+            return Value?.ToString() ?? string.Empty;
+        }
+
         #endregion
 
 

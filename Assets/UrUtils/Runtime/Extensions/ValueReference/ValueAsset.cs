@@ -8,6 +8,13 @@ namespace UrUtils.Extensions.ValueReference
 
         [SerializeField]
         T StoredValue = default;
+
+        protected ValueAsset() { }
+
+        protected ValueAsset(T value)
+        {
+            StoredValue = value;
+        }
     }
 
     public static class ValueAssetConstants
