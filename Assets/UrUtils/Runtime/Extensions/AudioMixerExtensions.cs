@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,16 +7,8 @@ namespace UrUtils.Extensions
 {
     public static class AudioMixerExtensions
     {
-        public const string ExposedVolumeName = "Volume";
-
-
-        public static IEnumerator FadeVolume(this AudioMixer mixer, float duration, float targetVolume)
-        {
-            return mixer.FadeVolume(ExposedVolumeName, duration, targetVolume);
-        }
-
         public static IEnumerator FadeVolume(this AudioMixer mixer,
-            string volumeParameterName, float duration, float targetVolume)
+            string volumeParameterName, float duration, float targetVolume, Action onFinished = null)
         {
             float currentTime = 0;
             mixer.GetFloat(volumeParameterName, out var currentVolume);
@@ -25,10 +18,29 @@ namespace UrUtils.Extensions
             while (currentTime < duration)
             {
                 currentTime += Time.deltaTime;
-                float newVol = Mathf.Lerp(currentVolume, targetValue, currentTime / duration);
-                mixer.SetFloat(volumeParameterName, Mathf.Log10(newVol) * 20);
+                float newVolume = Mathf.Lerp(currentVolume, targetValue, currentTime / duration);
+                mixer.SetFloat(volumeParameterName, Mathf.Log10(newVolume) * 20);
                 yield return null;
             }
+
+            onFinished?.Invoke();
+        }
+
+        public static IEnumerator FadeFloat(this AudioMixer mixer,
+            string parameterName, float duration, float targetValue, Action onFinished = null)
+        {
+            float currentTime = 0;
+            mixer.GetFloat(parameterName, out var currentValue);
+
+            while (currentTime < duration)
+            {
+                currentTime += Time.deltaTime;
+                float newValue = Mathf.Lerp(currentValue, targetValue, currentValue / duration);
+                mixer.SetFloat(parameterName, newValue);
+                yield return null;
+            }
+
+            onFinished?.Invoke();
         }
     }
 }
