@@ -5,7 +5,7 @@ namespace UrUtils.Extensions.ValueReference.Types
 {
     [CreateAssetMenu(menuName = ValueAssetConstants.MenuItemRoot + "Color")]
     public class ColorAsset : ValueAsset<Color> {
-        public ColorAsset() { }
+        public ColorAsset() : base(Color.white) { }
         public ColorAsset(Color value) : base(value) { }
     }
 
