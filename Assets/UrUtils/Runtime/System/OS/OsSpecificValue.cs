@@ -28,8 +28,7 @@ namespace UrUtils.System.OS
 
         void CheckOs()
         {
-            var os = SystemUtils.GetOperatingSystemFamily();
-            var osValue = OsValues.FirstOrDefault(osValue => osValue.Os == os);
+            var osValue = OsValues.FirstOrDefault(osValue => osValue.Os == SystemUtils.OperatingSystemFamily);
             if (osValue == null)
                 return;
 

@@ -4,14 +4,19 @@ namespace UrUtils.System
 {
     public static class SystemUtils
     {
-        public static OperatingSystemFamily GetOperatingSystemFamily()
+        #region Os detection
+
+        public static OperatingSystemFamily OperatingSystemFamily => DetectedOs ??= GetOperatingSystemFamily();
+        static OperatingSystemFamily? DetectedOs = null;
+
+        static OperatingSystemFamily GetOperatingSystemFamily()
         {
             var os = SystemInfo.operatingSystemFamily;
             return os switch
             {
                 OperatingSystemFamily.Other => DetectOperatingSystemFamily(),
 
-                // Windows, MacOSX, Linux - trust unity detection
+                // Windows, MacOSX, Linux - trust Unity detection
                 _ => os
             };
         }
@@ -40,8 +45,10 @@ namespace UrUtils.System
             if (osName.Contains("mac")) // Well, who knows
                 return OperatingSystemFamily.MacOSX;
 
-            Debug.Log($"Couldn't detect system type from its name '{SystemInfo.operatingSystem}'");
+            Debug.LogWarning($"Couldn't detect system type from its name '{SystemInfo.operatingSystem}'");
             return OperatingSystemFamily.Other;
         }
+
+        #endregion
     }
 }
