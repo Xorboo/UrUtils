@@ -26,7 +26,7 @@ namespace UrUtils.System
         /// </summary>
         static OperatingSystemFamily DetectOperatingSystemFamily()
         {
-#if !UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN
             return OperatingSystemFamily.Windows;
 #elif UNITY_STANDALONE_OSX
             return OperatingSystemFamily.MacOSX;
