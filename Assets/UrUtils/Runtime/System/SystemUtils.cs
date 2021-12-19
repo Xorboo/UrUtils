@@ -32,8 +32,7 @@ namespace UrUtils.System
             return OperatingSystemFamily.MacOSX;
 #elif UNITY_STANDALONE_LINUX
             return OperatingSystemFamily.Linux;
-#endif
-
+#else
             string osName = SystemInfo.operatingSystem.ToLower();
 
             if (osName.Contains("macos"))
@@ -47,6 +46,7 @@ namespace UrUtils.System
 
             Debug.LogWarning($"Couldn't detect system type from its name '{SystemInfo.operatingSystem}'");
             return OperatingSystemFamily.Other;
+#endif
         }
 
         #endregion

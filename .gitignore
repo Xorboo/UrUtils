@@ -175,3 +175,6 @@ fabric.properties
 
 # Don't commit Odin plugin into publicly-available repository :)
 /Assets/Plugins/Sirenix**
+
+# Autosave scenes when entering play mode
+urutils.saveonplay
