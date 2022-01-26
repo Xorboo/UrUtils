@@ -115,14 +115,21 @@ namespace UrUtils.Localization.LocalizedAsset
                 }
 
                 Editor_RegisterKnownDrivenProperties(OnUpdateAsset);
-                OnUpdateAsset.Invoke(localizedAsset);
+                CallUpdateAsset(localizedAsset);
                 Editor_RefreshEventObjects(OnUpdateAsset);
             }
             else
             #endif
             {
-                OnUpdateAsset.Invoke(localizedAsset);
+                CallUpdateAsset(localizedAsset);
             }
+        }
+
+
+        // Override this to use update value
+        protected virtual void CallUpdateAsset(TObject value)
+        {
+            OnUpdateAsset?.Invoke(value);
         }
     }
 }
