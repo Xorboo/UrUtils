@@ -1,5 +1,8 @@
 // This file is copied from Unity's LocalizedAssetBehaviour to insert Odin's [DrawWithUnity] attribute
+#if URUTILS_UNITY_LOCALIZATION
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif // ODIN_INSPECTOR
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization;
@@ -133,3 +136,4 @@ namespace UrUtils.Localization.LocalizedAsset
         }
     }
 }
+#endif // URUTILS_UNITY_LOCALIZATION

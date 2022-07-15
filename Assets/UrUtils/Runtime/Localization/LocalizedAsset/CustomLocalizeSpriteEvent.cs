@@ -1,4 +1,5 @@
 // This file is copied from Unity's LocalizeSpriteEvent to insert Odin's [DrawWithUnity] attribute (inside CustomLocalizedAssetBehaviour)
+#if URUTILS_UNITY_LOCALIZATION
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
@@ -26,3 +27,4 @@ namespace UrUtils.Localization.LocalizedAsset
     {
     }
 }
+#endif // URUTILS_UNITY_LOCALIZATION
