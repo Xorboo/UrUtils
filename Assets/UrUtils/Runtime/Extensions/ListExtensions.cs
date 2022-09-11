@@ -10,11 +10,21 @@ namespace UrUtils.Extensions
             return list.Count == 0;
         }
 
-        public static T Pop<T>(this IList<T> list, int index)
+        public static T PopAt<T>(this IList<T> list, int index)
         {
-            T element = list[Rand.Range(0, list.Count)];
+            T element = list[index];
             list.RemoveAt(index);
             return element;
+        }
+
+        public static T PopFirst<T>(this IList<T> list)
+        {
+            return list.PopAt(0);
+        }
+
+        public static T PopLast<T>(this IList<T> list)
+        {
+            return list.PopAt(list.Count - 1);
         }
 
         // Fisher-Yates shuffle
@@ -31,7 +41,7 @@ namespace UrUtils.Extensions
 
         public static T Random<T>(this IList<T> list) => list[Rand.Range(0, list.Count)];
         public static T RandomOrDefault<T>(this IList<T> list) => list.Empty() ? default : list[Rand.Range(0, list.Count)];
-        public static T PopRandom<T>(this IList<T> list) => Pop(list, Rand.Range(0, list.Count));
+        public static T PopRandom<T>(this IList<T> list) => PopAt(list, Rand.Range(0, list.Count));
         public static T PopRandomOrDefault<T>(this IList<T> list) => list.Empty() ? default : PopRandom(list);
 
         public static bool InRange<T>(this IList<T> list, int index) => 0 <= index && index < list.Count;
