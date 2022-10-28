@@ -68,6 +68,14 @@ namespace UrUtils.Localization
             StringReference.SetReference(StringReference.TableReference, localizationKey);
         }
 
+        /// <summary>
+        /// Set localization key, keeping the same table
+        /// </summary>
+        public void SetLocalizationKey(TableEntryReference tableEntryReference)
+        {
+            StringReference.SetReference(StringReference.TableReference, tableEntryReference);
+        }
+
 
         #region Unity
 
