@@ -14,12 +14,12 @@ namespace UrUtils.System.OS
 #if UNITY_EDITOR && ODIN_INSPECTOR
         [ValidateInput(nameof(OsListIsValid), "Duplicate entries found, only first for each type will be used")]
 #endif
-        List<OsValue> OsValues;
+        protected List<OsValue> OsValues;
 
 
         #region Unity
 
-        void Awake()
+        protected virtual void Awake()
         {
             CheckOs();
         }
@@ -51,7 +51,7 @@ namespace UrUtils.System.OS
 
 
         [Serializable]
-        class OsValue
+        protected class OsValue
         {
             public OperatingSystemFamily Os = OperatingSystemFamily.Other;
             public T Value = default;
