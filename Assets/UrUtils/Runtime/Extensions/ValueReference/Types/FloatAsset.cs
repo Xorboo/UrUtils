@@ -10,5 +10,9 @@ namespace UrUtils.Extensions.ValueReference.Types
     }
 
     [Serializable]
-    public class FloatReference : ValueReference<float, FloatAsset> { }
+    public class FloatReference : ValueReference<float, FloatAsset>
+    {
+        public FloatReference() { }
+        public FloatReference(float value) : base(value) { }
+    }
 }

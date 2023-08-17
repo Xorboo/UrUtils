@@ -1,3 +1,5 @@
+using UrUtils.Extensions.ValueReference.Types;
+
 namespace UrUtils.Extensions
 {
     public static class StringExtensions
@@ -9,6 +11,8 @@ namespace UrUtils.Extensions
 
         public static bool IsNullOrWhiteSpace(this string @this)
         {
+            var r = new FloatReference();
+            var x = new FloatReference(4.1f);
             return string.IsNullOrWhiteSpace(@this);
         }
     }

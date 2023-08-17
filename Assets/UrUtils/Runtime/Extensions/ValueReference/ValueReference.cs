@@ -49,6 +49,21 @@ namespace UrUtils.Extensions.ValueReference
         #endregion
 
 
+        #region Constructor
+
+        public ValueReference()
+        {
+        }
+
+        public ValueReference(TValue value)
+        {
+            Type = UseType.V;
+            ValueData = value;
+        }
+
+        #endregion
+
+
         #region Inline ScriptableObject Editing
 
 #if ODIN_INSPECTOR

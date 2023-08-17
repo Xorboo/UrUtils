@@ -11,5 +11,9 @@ namespace UrUtils.Extensions.ValueReference.Types
     }
 
     [Serializable]
-    public class StringReference : ValueReference<string, StringAsset> { }
+    public class StringReference : ValueReference<string, StringAsset>
+    {
+        public StringReference() { }
+        public StringReference(string value) : base(value) { }
+    }
 }
