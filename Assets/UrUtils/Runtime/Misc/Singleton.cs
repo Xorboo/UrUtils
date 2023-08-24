@@ -73,7 +73,8 @@ namespace UrUtils.Misc
 
                 if (instances.Length > 1)
                 {
-                    Debug.LogError($"[Singleton] Something went wrong  - there should never be more than 1 singleton (have {instances.Length})! Reopening the scene might fix it.");
+                    Debug.LogError(
+                        $"[Singleton] Something went wrong  - there should never be more than 1 singleton (have {instances.Length})! Reopening the scene might fix it.");
                     return InstanceRef;
                 }
 
@@ -96,14 +97,15 @@ namespace UrUtils.Misc
                         var singletonObject = new GameObject();
                         InstanceRef = singletonObject.AddComponent<T>();
 
-                        Debug.Log($"[Singleton] An instance of '{typeof(T)}' is needed in the scene, so '{singletonObject}' was created");
+                        Debug.Log(
+                            $"[Singleton] An instance of '{typeof(T)}' is needed in the scene, so '{singletonObject}' was created");
                     }
                     else
                     {
-                        Debug.Log($"Should create singleton '{typeof(T)}', but [canCreateObject] is false. Add it manually to the scene or fix script execution order");
+                        Debug.Log(
+                            $"Should create singleton '{typeof(T)}', but [canCreateObject] is false. Add it manually to the scene or fix script execution order");
                     }
                 }
-
             }
 
             return InstanceRef;
@@ -115,14 +117,16 @@ namespace UrUtils.Misc
             {
                 InstanceRef = GetComponent<T>();
                 gameObject.name = $"[Singleton] {typeof(T)}";
-                if (transform.parent)
-                {
-                    Debug.Log($"Singleton '{gameObject.name}' is not a root object. Orphaning it to properly set `DontDestroyOnLoad`");
-                    transform.parent = null;
-                }
 
                 if (IsPersistent)
                 {
+                    if (transform.parent)
+                    {
+                        Debug.Log(
+                            $"Singleton '{gameObject.name}' is not a root object. Orphaning it to properly set `DontDestroyOnLoad`");
+                        transform.parent = null;
+                    }
+
                     DontDestroyOnLoad(gameObject);
                 }
             }
@@ -130,7 +134,8 @@ namespace UrUtils.Misc
             {
                 if (InstanceRef != GetComponent<T>())
                 {
-                    Debug.Log($"Singleton '{typeof(T)}' awakes, but instance is already not null - destroying this copy");
+                    Debug.Log(
+                        $"Singleton '{typeof(T)}' awakes, but instance is already not null - destroying this copy");
                     DestroyImmediate(this);
                 }
             }
